@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "NODE_EXTRA_CA_CERTS=./global-bundle.pem env-cmd node .",
+    "dev": "NODE_EXTRA_CA_CERTS=./global-bundle.pem env-cmd nodemon --trace-warnings .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,6 +21,7 @@
   "dependencies": {
     "env-cmd": "^10.1.0",
     "express": "^4.18.1",
+    "nodemon": "^2.0.16",
     "pg": "^8.7.3"
   }
 }
