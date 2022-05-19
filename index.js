@@ -30,7 +30,7 @@ app.get('/with-ssl', async (req,res) => {
     // connectionString,
     ssl: {
       rejectUnauthorized: true,
-      ca: fs.readFileSync(process.env.PGSSLROOTCERT).toString(),
+      ca: fs.readFileSync(path.resolve(process.env.PGSSLROOTCERT)).toString(),
     },
   }
 
