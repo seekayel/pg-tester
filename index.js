@@ -1,10 +1,15 @@
 const {Pool, Client} = require('pg')
+const path = require('path')
 const express = require('express')
 const app = express()
 
 const connString = process.env.DATABASE_URL
 
 // let pool = null
+
+app.get('/ca-cert', async (req,res) => {
+  res.sendFile(path.resolve(process.env.NODE_EXTRA_CA_CERTS))
+})
 
 app.all('*', async (req, res) => {
   console.log(JSON.stringify(process.env.NODE_EXTRA_CA_CERTS,null,2))
