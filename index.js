@@ -3,7 +3,7 @@ const path = require('path')
 const express = require('express')
 const app = express()
 
-const connString = process.env.DATABASE_URL
+const connString = "" //process.env.DATABASE_URL
 
 // let pool = null
 
