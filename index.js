@@ -12,7 +12,7 @@ app.get('/ca-cert', async (req,res) => {
 })
 
 app.all('*', async (req, res) => {
-  console.log(JSON.stringify(process.env.NODE_EXTRA_CA_CERTS,null,2))
+  console.log(JSON.stringify(process.env,null,2))
   console.log(`Request on: ${req.path}`)
   // if(!pool){
   //   console.log(`Trying: ${connString}`)
