@@ -17,8 +17,10 @@ async function query(config) {
   const client = new Client(config);
   await client.connect();
 
-  console.log('client demo: query')
+  console.log(`Client with config: ${JSON.stringify(config,null,2)}`)
   const now = await client.query("SELECT NOW()");
+  // console.log(`Queried with: ${JSON.stringify(client,null,2)}`)
+  console.log(`TLS Options: ${(client.connection?.stream?._tlsOptions)? 'Configured':'Missing'}`)
   return JSON.stringify(now.rows[0].now,null,2)
 }
 
@@ -60,7 +62,7 @@ app.get('/with-string', async (req,res) => {
   console.log('got /with-string')
 
   const config = {
-    connectionString: process.env.DATABASE_URL,
+    connectionString: process.env.DATABASE_URL_INSECURE,
   }
 
   const data = await query(config)
