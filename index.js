@@ -27,7 +27,6 @@ app.get('/with-ssl', async (req,res) => {
   console.log('got /with-ssl')
 
   const config = {
-    // connectionString,
     ssl: {
       rejectUnauthorized: true,
       ca: fs.readFileSync(path.resolve(process.env.PGSSLROOTCERT)).toString(),
@@ -40,8 +39,38 @@ app.get('/with-ssl', async (req,res) => {
   res.send(`The time is now: ${data}`)
 })
 
+app.get('/with-ssl-string', async (req,res) => {
+  console.log('got /with-ssl')
+
+  const config = {
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+      rejectUnauthorized: true,
+      ca: fs.readFileSync(path.resolve(process.env.PGSSLROOTCERT)).toString(),
+    },
+  }
+
+  const data = await query(config)
+
+  console.log(`Just queried ${data}`)
+  res.send(`The time is now: ${data}`)
+})
+
+app.get('/with-string', async (req,res) => {
+  console.log('got /with-string')
+
+  const config = {
+    connectionString: process.env.DATABASE_URL,
+  }
+
+  const data = await query(config)
+
+  console.log(`Just queried ${data}`)
+  res.send(`The time is now: ${data}`)
+})
+
 app.all('*', async (req, res) => {
-  console.log(JSON.stringify(process.env,null,2))
+  // console.log(JSON.stringify(process.env,null,2))
   console.log(`Request on: ${req.path}`)
   // if(!pool){
   //   console.log(`Trying: ${connString}`)
