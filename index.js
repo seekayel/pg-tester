@@ -45,11 +45,11 @@ app.get('/with-ssl-string', async (req,res) => {
   console.log('got /with-ssl')
 
   const config = {
-    connectionString: process.env.DATABASE_URL,
-    ssl: {
-      rejectUnauthorized: true,
-      ca: fs.readFileSync(path.resolve(process.env.PGSSLROOTCERT)).toString(),
-    },
+    connectionString: process.env.DATABASE_URL_SECURE,
+    // ssl: {
+    //   rejectUnauthorized: true,
+    //   ca: fs.readFileSync(path.resolve(process.env.PGSSLROOTCERT)).toString(),
+    // },
   }
 
   const data = await query(config)
