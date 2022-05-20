@@ -2,6 +2,7 @@ const {Pool, Client} = require('pg')
 const path = require('path')
 const fs = require('fs')
 const express = require('express')
+const { resolve } = require('path')
 const app = express()
 
 const connString = "" //process.env.DATABASE_URL
@@ -69,6 +70,10 @@ app.get('/with-string', async (req,res) => {
 
   console.log(`Just queried ${data}`)
   res.send(`The time is now: ${data}`)
+})
+
+app.get('/info', (req,res) => {
+  res.json({env: process.env, resolve: path.resolve('.')})
 })
 
 app.all('*', async (req, res) => {
