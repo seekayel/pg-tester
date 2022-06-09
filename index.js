@@ -6,6 +6,11 @@ const { resolve } = require('path')
 const app = express()
 
 
+app.get('/files', async (req,res) => {
+  fs.readdir(path.resolve('.'), (error, files) => {
+    res.json(files)
+  })
+})
 app.get('/file/ca-cert', async (req,res) => {
   console.log(`got ${req.path}`)
   res.sendFile(path.resolve(process.env.NODE_EXTRA_CA_CERTS))
