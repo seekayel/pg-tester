@@ -123,4 +123,6 @@ app.all('*', async (req, res) => {
   res.send('mic check, good.')
 })
 
-app.listen(process.env.PORT || 3000)
+app.listen(process.env.PORT || 3000, () => {
+  console.log(`Started server with env: ${JSON.stringify(process.env,null,2)}`)
+})
