@@ -7,9 +7,22 @@ const app = express()
 
 
 app.get('/files', async (req,res) => {
-  fs.readdir(path.resolve('.'), (error, files) => {
-    res.json(files)
-  })
+  const files = {}
+  Promise.all([
+    fs.readdir(path.resolve('.'), (error, entries) => {
+      console.log(entries)
+      files['.'] = entries
+    }),
+    fs.readdirSync(path.resolve('./dist'), (error, entries) => {
+      console.log(entries)
+      files['dist'] = entries
+    }),
+    fs.readdir(path.resolve('./node_modules'), (error, entries) => {
+      console.log(entries)
+      files['node_modules'] = entries
+    })
+  ])
+  res.json(files)
 })
 app.get('/file/ca-cert', async (req,res) => {
   console.log(`got ${req.path}`)
