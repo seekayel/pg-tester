@@ -8,20 +8,11 @@ const app = express()
 
 app.get('/files', async (req,res) => {
   const files = {}
-  Promise.all([
-    fs.readdir(path.resolve('.'), (error, entries) => {
-      console.log(entries)
-      files['.'] = entries
-    }),
-    fs.readdirSync(path.resolve('./dist'), (error, entries) => {
-      console.log(entries)
-      files['dist'] = entries
-    }),
-    fs.readdir(path.resolve('./node_modules'), (error, entries) => {
-      console.log(entries)
-      files['node_modules'] = entries
-    })
-  ])
+  console.log('starting')
+  files['.'] = fs.readdirSync(path.resolve('.'))
+  files['dist'] = fs.readdirSync(path.resolve('./dist'))
+  files['node_modules'] = fs.readdirSync(path.resolve('./node_modules'))
+  console.log(JSON.stringify(files,null,2))
   res.json(files)
 })
 app.get('/file/ca-cert', async (req,res) => {
