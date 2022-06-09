@@ -21,7 +21,7 @@ app.get('/file/ca-cert', async (req,res) => {
 })
 app.get('/file/global-bundle', async (req,res) => {
   console.log(`got ${req.path}`)
-  res.sendFile(path.resolve(process.env.BUNDLE_FILE ||  './_cyclic/global-bundle.pem'))
+  res.sendFile(path.resolve(process.env.PGSSLROOTCERT ||  './_cyclic/global-bundle.pem'))
 })
 app.get('/file/postgres-root', async (req,res) => {
   console.log(`got ${req.path}`)
